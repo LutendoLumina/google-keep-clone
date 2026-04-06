@@ -2,17 +2,28 @@ import "./Notes.css";
 import Note from "./Note";
 
 const Notes = (props) => {
-  const { notes, deleteNote, toggleModal, setSelectedNote } = props;
+  const {
+    notes,
+    searchQuery,
+    isListView,
+    deleteNote,
+    toggleModal,
+    setSelectedNote,
+  } = props;
 
   if (notes.length === 0) {
     return (
       <div className="notes">
-        <p>Notes you add appear here.</p>
+        {searchQuery ? (
+          <p>No matching results for "{searchQuery}"</p>
+        ) : (
+          <p>Notes you add appear here.</p>
+        )}
       </div>
     );
   }
   return (
-    <div className="notes">
+    <div className={isListView ? "notes notes--list" : "notes notes--grid"}>
       {notes.map((note) => (
         <Note
           key={note.id}
@@ -27,4 +38,3 @@ const Notes = (props) => {
 };
 
 export default Notes;
-

@@ -12,6 +12,24 @@ const App = () => {
   const [selectedNote, setSelectedNote] = useState({});
   const [isModalOpen, setisModalOpen] = useState(false);
 
+  //NAVBAR components
+  const [searchQuery, setSearchQuery] = useState("");
+  const [isListView, setIsListView] = useState(false);
+
+  const filteredNotes = notes.filter((note) => {
+    const query = searchQuery.toLowerCase();
+    return (
+      note.title?.toLowerCase().includes(query) ||
+      note.text?.toLowerCase().includes(query)
+    );
+  });
+
+  // SIDEBAR components
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [hovered, setHovered] = useState(false);
+
+  const sidebarOpen = menuOpen || hovered;
+
   const addNote = (note) => {
     setNotes((prevNotes) => {
       return [...prevNotes, note];
@@ -45,11 +63,23 @@ const App = () => {
 
   return (
     <div>
-      <Navbar />
-      <Sidebar />
+      <Navbar
+        onMenuClick={() => setMenuOpen((prev) => !prev)}
+        searchQuery={searchQuery}
+        onSearch={setSearchQuery}
+        isListView={isListView}
+        onViewToggle={() => setIsListView(prev => !prev)}
+      />
+      <Sidebar
+        expanded={sidebarOpen}
+        onHoverExpand={() => setHovered(true)}
+        onHoverCollapse={() => setHovered(false)}
+      />
       <Form addNote={addNote} />
       <Notes
-        notes={notes}
+        notes={filteredNotes}
+        searchQuery={searchQuery}
+        isListView={isListView}
         deleteNote={deleteNote}
         toggleModal={toggleModal}
         setSelectedNote={setSelectedNote}
