@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import logo from "../../assets/google-keep-logo.png";
 import "./Navbar.css";
 
 const Navbar = ({
@@ -75,7 +76,7 @@ const Navbar = ({
         </div>
         <a href="#">
           <img
-            src="src/assets/google-keep-logo.png"
+            src={logo}
             className="logo"
             alt="Google Keep Logo"
             onClick={() => onSearch("")}
