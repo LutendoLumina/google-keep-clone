@@ -2,18 +2,19 @@
     position: fixed;
     left: 0;
     top: 64px;
+    z-index: 50;
     display: flex;
     flex-direction: column;
     margin-left: 18px;
     margin-top: 5px;
-    color: #5f6368;
-    width: 80px;
+    color: var(--text-muted);
+    width: 10px;
     transition: width 0.25s ease;
     overflow: hidden;
 }
 
 .sidebar--expanded {
-    width: 220px;
+    width: 280px;
 }
 
 .sidebar--collapsed {
@@ -25,7 +26,7 @@
 }
 
 .sidebar--collapsed .sidebar-active-item {
-    background-color: #fef0c3;
+    background-color: var(--highlight);
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -34,7 +35,7 @@
 }
 
 .sidebar--collapsed .sidebar-item:hover {
-    background-color: #f1f3f4;
+    background-color: var(--surface-subtle);
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -44,13 +45,13 @@
 }
 
 .active {
-    background-color: #fef0c3;
+    background-color: var(--highlight);
     border-radius: 50%;
-    color: black;
+    color: var(--text);
 }
 
 .active:hover {
-    background-color: #fef0c3;
+    background-color: var(--highlight);
 }
 
 .sidebar .sidebar-item {
@@ -70,7 +71,7 @@
 }
 
 .sidebar .sidebar-text {
-    color: black;
+    color: var(--text);
     font-size: 0.9rem;
     margin-left: 20px;
     width: 250px;
@@ -86,19 +87,13 @@
 }
 
 .sidebar-item:hover {
-  background-color: #f1f3f4;
+  background-color: var(--surface-subtle);
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
 }
 
 .sidebar-active-item {
-  background-color: #fef0c3;
+  background-color: var(--highlight);
   border-top-right-radius: 25px;
   border-bottom-right-radius: 25px;
 }
-
-/* .sidebar-active-item:hover {
-  background-color: #f1f3f4;
-  border-top-right-radius: 25px;
-  border-bottom-right-radius: 25px;
-} */

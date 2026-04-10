@@ -1,28 +1,31 @@
 import React, { useState } from "react";
 
 const Note = (props) => {
-
-  const { toggleModal, note, setSelectedNote } = props;
+  const { toggleModal, note, setSelectedNote, archiveIcon, archiveTooltip } = props;
   const [isHover, setIsHover] = useState(false);
 
   const noteClickHandler = () => {
     toggleModal();
     setSelectedNote(note);
-  }
+  };
 
   const hoverOverHandler = () => {
-    console.log("hover:", isHover);
     setIsHover(true);
-    console.log("hover:", isHover);
   };
 
   const hoverOutHandler = () => {
     setIsHover(false);
   };
 
-  const deleteHandler = () => {
+  const archiveHandler = (e) => {
+    e.stopPropagation();
+    props.archiveNote(note.id);
+  };
+
+  const deleteHandler = (e) => {
+    e.stopPropagation();
     props.deleteNote(note.id);
-  }
+  };
 
   return (
     <div
@@ -37,6 +40,23 @@ const Note = (props) => {
       )}
       <div className="title">{note.title}</div>
       <div className="text">{note.text}</div>
+      {note.reminder?.date && (
+        <div className="reminder-chip">
+          <i className="material-symbols-outlined reminder-chip-icon">
+            task_alt
+          </i>
+          <span>Today, {note.reminder.time}</span>
+          <i
+            className="material-symbols-outlined reminder-chip-close"
+            onClick={(e) => {
+              e.stopPropagation();
+              props.removeReminder(note.id);
+            }}
+          >
+            close
+          </i>
+        </div>
+      )}
       <div
         className="note-footer"
         style={{ visibility: isHover ? "visible" : "hidden" }}
@@ -61,9 +81,13 @@ const Note = (props) => {
           <i className="material-symbols-outlined hover small-icon">image</i>
           <span className="tooltip-text">Add Image</span>
         </div>
+        <div className="tooltip" onClick={archiveHandler}>
+          <i className="material-symbols-outlined hover small-icon">{archiveIcon || "archive"}</i>
+          <span className="tooltip-text">{archiveTooltip || "Archive"}</span>
+        </div>
         <div className="tooltip" onClick={deleteHandler}>
-          <i className="material-symbols-outlined hover small-icon">archive</i>
-          <span className="tooltip-text">Archive</span>
+          <i className="material-symbols-outlined hover small-icon">delete</i>
+          <span className="tooltip-text">Delete Note</span>
         </div>
         <div className="tooltip">
           <i className="material-symbols-outlined hover small-icon">

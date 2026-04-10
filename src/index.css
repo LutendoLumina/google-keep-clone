@@ -1,5 +1,73 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
+:root {
+  /* Core surfaces */
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-muted: #f8f9fa;
+  --surface-subtle: #f1f3f4;
+
+  /* Text */
+  --text: #202124;
+  --text-muted: #5f6368;
+  --text-subtle: #80868b;
+  --text-on-strong: #ffffff;
+
+  /* Borders / dividers */
+  --border: #dadce0;
+  --border-subtle: #e0e1e0;
+  --divider: #f1f3f4;
+
+  /* Brand / interactive */
+  --primary: #1a73e8;
+  --highlight: #fef0c3;
+
+  /* Components */
+  --tooltip-bg: #323232;
+  --tooltip-text: #ffffff;
+  --overlay: rgba(0, 0, 0, 0.5);
+  --shadow-1: 0 1px 2px 0 rgba(60, 64, 67, 0.302), 0 2px 6px 2px rgba(60, 64, 67, 0.149);
+  --shadow-2: 0 2px 10px rgba(0, 0, 0, 0.2);
+  --shadow-3: 0 4px 16px rgba(0, 0, 0, 0.2);
+  --shadow-4: 0 4px 16px rgba(0, 0, 0, 0.3);
+
+  /* Chips */
+  --chip-bg: #e8f0fe;
+  --chip-text: #1a73e8;
+}
+
+body.dark {
+  --bg: #202124;
+  --surface: #2b2c2f;
+  --surface-muted: #2f3136;
+  --surface-subtle: #303134;
+
+  --text: #e8eaed;
+  --text-muted: #bdc1c6;
+  --text-subtle: #9aa0a6;
+  --text-on-strong: #ffffff;
+
+  --border: #3c4043;
+  --border-subtle: #3c4043;
+  --divider: #3c4043;
+
+  --primary: #8ab4f8;
+  --highlight: #5f4b00;
+
+  --tooltip-bg: #1f1f1f;
+  --tooltip-text: #e8eaed;
+  --overlay: rgba(0, 0, 0, 0.6);
+
+  /* Shadows are slightly softer in dark mode */
+  --shadow-1: 0 1px 2px 0 rgba(0, 0, 0, 0.35), 0 2px 6px 2px rgba(0, 0, 0, 0.2);
+  --shadow-2: 0 2px 10px rgba(0, 0, 0, 0.35);
+  --shadow-3: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --shadow-4: 0 4px 16px rgba(0, 0, 0, 0.45);
+
+  --chip-bg: rgba(138, 180, 248, 0.18);
+  --chip-text: #8ab4f8;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -7,6 +75,109 @@
     font-family: "Roboto", sans-serif;
 }
 
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+*, *::before, *::after {
+  transition: all 0.3s ease;
+}
+
 .material-symbols-outlined {
     padding: 10px;
+}
+
+.main-content {
+  margin-left: 280px;
+  margin-top: 64px;
+  padding: 8px 16px;
+  transition: margin-left 0.25s ease;
+}
+
+.main-expanded {
+  margin-left: 280px;   /* 👈 matches expanded sidebar width + some breathing room */
+}
+
+.main-collapsed {
+  margin-left: 90px;    /* 👈 matches collapsed sidebar icon-only width */
+}
+
+.empty-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15vh;
+  color: var(--text-subtle);
+}
+
+.empty-icon {
+  font-size: 5rem !important;
+  color: var(--border);
+  margin-bottom: 16px;
+}
+
+.trash-header {
+  text-align: center;
+  padding: 12px;
+  font-style: italic;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.empty-bin-btn {
+  background: none;
+  border: none;
+  color: var(--primary);
+  cursor: pointer;
+  margin-left: 12px;
+  font-size: 0.9rem;
+}
+
+.labels-modal-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10vh;
+}
+
+.labels-modal {
+  background: var(--surface);
+  border-radius: 8px;
+  box-shadow: var(--shadow-2);
+  padding: 24px;
+  width: 320px;
+}
+
+.label-input-row {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  padding: 8px 0;
+  gap: 8px;
+}
+
+.label-input-row input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  background: transparent;
+  color: var(--text);
+}
+
+.label-done {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+.label-done button {
+  background: none;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: var(--text);
 }

@@ -1,0 +1,260 @@
+/* Responsive layout overrides (mobile-first adjustments via breakpoints)
+   Breakpoints:
+   - Large desktop: 1400px+
+   - Desktop: 1024px - 1399px
+   - Tablet landscape: 768px - 1023px
+   - Tablet portrait: 576px - 767px
+   - Mobile: below 576px
+*/
+
+/* Smooth layout transitions */
+nav,
+.sidebar,
+.main-content,
+.notes,
+.form-container,
+.search-area,
+.profile-actions-area,
+.logo-area {
+  transition: all 0.25s ease;
+}
+
+/* Touch-friendly tap targets */
+.hover,
+button,
+.sidebar-item,
+.sidebar-active-item,
+.settings-dropdown p,
+.apps-dropdown .app-item,
+.more-google-btn {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.hover {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Notes grid: explicit per breakpoint (overrides component queries) */
+.notes--grid {
+  columns: 4;
+  column-gap: 12px;
+}
+
+/* =========================
+   MOBILE (below 576px)
+   ========================= */
+@media (max-width: 575.98px) {
+  html {
+    font-size: 14px;
+  }
+
+  /* Navbar: keep top fixed feel, compact content */
+  nav {
+    margin: 0;
+    padding: 8px;
+  }
+
+  /* Hide everything but hamburger + logo by default */
+  .profile-actions-area > .tooltip:not(:last-child) {
+    display: none;
+  }
+
+  /* Search UX: full-width overlay when active */
+  nav.navbar--search-active .logo-area,
+  nav.navbar--search-active .profile-actions-area {
+    display: none;
+  }
+
+  .search-area {
+    width: 100%;
+    max-width: 100%;
+    height: 48px;
+    border-radius: 10px;
+  }
+
+  nav.navbar--search-active .search-area {
+    position: fixed;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    z-index: 1200;
+    width: auto;
+    box-shadow: var(--shadow-3);
+  }
+
+  /* Main content full width */
+  .main-content,
+  .main-expanded,
+  .main-collapsed {
+    margin-left: 0 !important;
+    padding: 8px;
+  }
+
+  /* Form full width with margin */
+  .form-container {
+    max-width: 100%;
+    margin: 8px;
+  }
+
+  /* Form footer: keep actions inside container (wrap/stack) */
+  .form-actions {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .form .form-actions .icons {
+    flex-wrap: wrap;
+    row-gap: 4px;
+  }
+
+  .form-button {
+    white-space: normal;
+    margin-left: auto;
+    gap: 8px;
+  }
+
+  /* Notes: 1 column */
+  .notes {
+    padding: 8px;
+  }
+  .notes--grid {
+    columns: 1 !important;
+  }
+
+  /* Note footer: wrap so icons never overflow */
+  .note .note-footer {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 4px;
+    padding: 8px 8px 12px 8px;
+  }
+
+  /* Note footer icons larger for touch */
+  .note-footer .material-symbols-outlined {
+    font-size: 1.35rem;
+  }
+
+  /* Sidebar: hidden by default, overlay slide-in when expanded */
+  .sidebar {
+    top: 64px;
+    left: 0;
+    margin-left: 0;
+    width: 220px;
+    height: calc(100vh - 64px);
+    background: var(--surface);
+    z-index: 1300;
+    transform: translateX(-110%);
+    box-shadow: var(--shadow-3);
+  }
+
+  .sidebar.sidebar--expanded {
+    transform: translateX(0);
+  }
+
+  .sidebar-backdrop {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 64px);
+    background: var(--overlay);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1250;
+    transition: all 0.25s ease;
+  }
+
+  .sidebar-backdrop.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+/* =========================
+   TABLET PORTRAIT (576px - 767px)
+   ========================= */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  /* Navbar: show all icons, slightly smaller search */
+  .search-area {
+    width: 420px;
+  }
+
+  /* Sidebar: collapsed by default visually, no hover expand */
+  .sidebar {
+    width: 56px !important;
+  }
+  .sidebar.sidebar--expanded {
+    width: 56px !important;
+  }
+  .sidebar .sidebar-text {
+    display: none !important;
+  }
+
+  /* Main content: align with collapsed sidebar */
+  .main-content,
+  .main-expanded,
+  .main-collapsed {
+    margin-left: 56px !important;
+  }
+
+  /* Notes grid: 2 columns */
+  .notes--grid {
+    columns: 2 !important;
+  }
+
+  /* Form: full width with margin */
+  .form-container {
+    max-width: 100%;
+    margin: 16px;
+  }
+}
+
+/* =========================
+   TABLET LANDSCAPE (768px - 1023px)
+   ========================= */
+@media (min-width: 768px) and (max-width: 1023.98px) {
+  /* Sidebar: collapsed by default, hover expand allowed (existing behavior) */
+  .sidebar {
+    width: 56px;
+  }
+
+  /* Main content margin for collapsed sidebar */
+  .main-content,
+  .main-collapsed {
+    margin-left: 56px !important;
+  }
+
+  /* Notes grid: 3 columns */
+  .notes--grid {
+    columns: 3 !important;
+  }
+
+  /* Form centered at 598px (existing) */
+  .form-container {
+    max-width: 598px;
+    margin: 8px auto;
+  }
+}
+
+/* =========================
+   DESKTOP (1024px - 1399px)
+   ========================= */
+@media (min-width: 1024px) and (max-width: 1399.98px) {
+  /* Keep current behavior; ensure grid stays 4 columns */
+  .notes--grid {
+    columns: 4 !important;
+  }
+}
+
+/* =========================
+   LARGE DESKTOP (1400px+)
+   ========================= */
+@media (min-width: 1400px) {
+  .notes--grid {
+    columns: 4 !important;
+  }
+}
+

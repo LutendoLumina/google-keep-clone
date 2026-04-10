@@ -8,8 +8,8 @@
     left: 0;
     top: 100%;
     font-size: 0.78rem;
-    background-color: #323232;
-    color: white;
+    background-color: var(--tooltip-bg);
+    color: var(--tooltip-text);
     opacity: 0.8;
     padding: 5px;
     white-space: nowrap;
@@ -22,18 +22,20 @@
     visibility: visible;
 }
 
-
-nav {
+/* nav container */
+nav {    
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 64px;
-    border-bottom: 1px solid #dadce0;
+    border-bottom: 1px solid var(--border);
     padding: 8px;
     margin: 0 10px;
-    color: #5f6368;
+    color: var(--text-muted);
+    background: var(--bg);
 }
 
+/* left side */
 .logo-area {
     display: flex;
     align-items: center;
@@ -46,7 +48,7 @@ nav {
 
 .logo-text {
     font-size: 1.4rem;
-    color: black;
+    color: var(--text);
     text-decoration: none;
     padding-left: 10px;
 }
@@ -55,44 +57,44 @@ nav {
     text-decoration: underline;
 }
 
+/* middle (search part) */
 .search-area {
-    background-color: #f1f3f4;
+    background-color: var(--surface-subtle);
     border: none;
     width: 692px;
     height: 48px;  
-    border-radius: 10px;
+    border-radius: 7px;
     display: flex;
     align-items: center;
 }
 .search-area input{
-    background-color: #f1f3f4;
+    background-color: var(--surface-subtle);
     border: none;
-    width: 100%;
+    width: 80%;
     height: 95%;
     outline: none;
     font-size: 1rem;
     margin-left: 10px;
+    color: var(--text);
 }
 
 input:focus {
     outline: none;
 }
 
-/* .search-area span {
-   margin-left: 10px; 
-} */
-
+/* right side (icons) */
 .profile-actions-area {
     display: flex;
 }
 
 .hover:hover {
-    background: #f1f3f4;
-    color: black;
+    background: var(--surface-subtle);
+    color: var(--text);
     border-radius: 50%;
     cursor: pointer;
 }
 
+/* settings icon */
 .settings-wrapper {
   position: relative;
 }
@@ -101,9 +103,9 @@ input:focus {
   position: absolute;
   top: 100%;
   right: 0;
-  background: white;
+  background: var(--surface);
   border-radius: 4px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  box-shadow: var(--shadow-2);
   padding: 8px 0;
   z-index: 100;
   min-width: 200px;
@@ -114,9 +116,86 @@ input:focus {
   margin: 0;
   font-size: 0.9rem;
   cursor: pointer;
-  color: #202124;
+  color: var(--text);
 }
 
 .settings-dropdown p:hover {
-  background-color: #f1f3f4;
+  background-color: var(--surface-subtle);
+}
+
+/*  google-apps icon */
+.apps-wrapper {
+  position: relative;
+}
+
+.apps-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 320px;
+  background: var(--surface-muted);
+  border-radius: 16px;
+  box-shadow: var(--shadow-3);
+  padding: 16px;
+  z-index: 100;
+}
+
+.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.app-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 8px;
+  border-radius: 12px;
+  cursor: pointer;
+  gap: 8px;
+}
+
+.app-item:hover {
+  background-color: var(--surface-subtle);
+}
+
+.app-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.app-name {
+  font-size: 0.78rem;
+  color: var(--text);
+  text-align: center;
+}
+
+.apps-footer {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+
+.more-google-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 8px 24px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  color: var(--text);
+}
+
+.more-google-btn:hover {
+  background-color: var(--surface-subtle);
 }

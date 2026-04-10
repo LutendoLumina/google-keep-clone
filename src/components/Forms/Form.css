@@ -1,19 +1,16 @@
 .form-container {
-    background-color: #fff;
+    background-color: var(--surface);
     max-width: 598px;
-    margin: 32px auto;
-    box-shadow: 0 1px 2px 0 rgba(60,64,67,0.302), 0 2px 6px 2px rgba(60,64,67,0.149);
-    border: 1px solid #081f08;
+    margin: 8px auto;
+    box-shadow: var(--shadow-1);
     border-radius: 8px;
-    border: none;
 }
 
 .form-container form {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 100%;
-    color: #5f6368;
+    color: var(--text-muted);
 }
 
 .form {
@@ -23,54 +20,161 @@
     padding: 10px;
 }
 
+.note-title, .note-text {
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    font-family: inherit;
+    padding: 10px 20px;
+    width: 100%;
+    resize: none;
+    overflow: hidden;
+    box-sizing: border-box;
+    background: transparent;
+    line-height: 1.5;
+    color: var(--text);
+}
+
 .note-title {
-    border: none;
-    font-size: 1rem;
-    height: 100%;
-    padding: 10px;
-    margin-left: 10px;
-    width: 100%;
-    margin-right: 10px;
-    padding-left: 10px;
-
+    font-size: 1.1rem;
+    font-weight: 600;
 }
 
-.note-text {
-    border: none;
-    font-size: 1rem;
-    height: 100%;
-    padding: 10px;
-    margin-left: 10px;
-    width: 100%;
-    margin-right: 10px;
-    padding-left: 10px;
-
-}
-
+/* inactive form */
 .form-actions {
     display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    padding-top: 4px;
 }
 
-
+/* active form */
 .form .form-actions .icons {
     display: flex;
+    align-items: center;
+    gap: 2px;
 }
 
 .form .form-actions {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
     margin-top: 5px;
+    padding-top: 4px;
+}
+
+.form-button {
+    display: flex;
+    flex-direction: row;        
+    align-items: center;
+    gap: 12px;
+    white-space: nowrap;
+    margin-left: auto;
+}
+
+.edited-time {
+    font-size: 0.78rem;
+    color: var(--text-subtle);
 }
 
 .close-btn {
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 4px;
+    color: var(--text);
+}
+
+.close-btn:hover {
+    background-color: var(--surface-subtle);
 }
 
 .small-icon {
-    color: black;
-    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-size: 1.1rem !important;
+}
+
+.modal .form-container {
+    box-shadow: none;
+    margin: 0;
+}
+
+
+/* reminder */
+.reminder-wrapper {
+  position: relative;
+}
+
+.reminder-picker {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--surface);
+  border-radius: 8px;
+  box-shadow: var(--shadow-3);
+  padding: 16px;
+  z-index: 200;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: var(--text);
+}
+
+.reminder-picker-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--divider);
+}
+
+.reminder-back {
+  cursor: pointer;
+  font-size: 1.1rem !important;
+  color: var(--text-muted);
+}
+
+.reminder-back:hover {
+  color: var(--text);
+}
+
+.reminder-select {
+  width: 100%;
+  padding: 10px 8px;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  outline: none;
+  font-size: 0.9rem;
+  font-family: inherit;
+  background: var(--surface);
+  cursor: pointer;
+  appearance: auto;
+  color: var(--text);
+}
+
+.reminder-picker-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.reminder-save-btn {
+  background: none;
+  border: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 4px;
+  color: var(--text);
+}
+
+.reminder-save-btn:hover {
+  background-color: var(--surface-subtle);
 }

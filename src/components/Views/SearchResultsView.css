@@ -1,0 +1,22 @@
+.search-results {
+  padding: 16px;
+}
+
+.search-results-count {
+  font-size: 0.85rem;
+  color: var(--text-subtle);
+  margin-bottom: 16px;
+  padding-left: 4px;
+}
+
+.source-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  background: var(--surface-subtle);
+  border-radius: 4px;
+  padding: 2px 8px;
+  margin: 8px 15px 0 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}

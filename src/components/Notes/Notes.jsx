@@ -7,17 +7,24 @@ const Notes = (props) => {
     searchQuery,
     isListView,
     deleteNote,
+    archiveNote,
     toggleModal,
     setSelectedNote,
   } = props;
 
   if (notes.length === 0) {
     return (
-      <div className="notes">
+      <div className="notes notes-empty">
         {searchQuery ? (
-          <p>No matching results for "{searchQuery}"</p>
+          <div className="empty-view">
+            <i className="material-symbols-outlined empty-icon">search</i>
+            <p>No matching results for "{searchQuery}"</p>
+          </div>
         ) : (
-          <p>Notes you add appear here.</p>
+          <div className="empty-view">
+            <i className="material-symbols-outlined empty-icon">lightbulb_2</i>
+            <p>Notes you add appear here.</p>
+          </div>
         )}
       </div>
     );
@@ -29,6 +36,7 @@ const Notes = (props) => {
           key={note.id}
           note={note}
           deleteNote={deleteNote}
+          archiveNote={archiveNote}
           toggleModal={toggleModal}
           setSelectedNote={setSelectedNote}
         />
