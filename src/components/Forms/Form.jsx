@@ -3,7 +3,6 @@ import "./Form.css";
 import { uid } from "uid";
 
 const Form = (props) => {
-  
   const { edit, selectedNote, toggleModal, editNote } = props;
   const [title, setTitle] = useState((edit && selectedNote.title) || "");
   const [text, setText] = useState((edit && selectedNote.text) || "");
@@ -80,6 +79,7 @@ const Form = (props) => {
         id: selectedNote.id,
         title,
         text,
+        reminder,
       });
       toggleModal();
     }
@@ -116,10 +116,28 @@ const Form = (props) => {
             placeholder="Take a note..."
             rows={1}
           />
+          {isActiveForm && reminder?.date && (
+            <div className="reminder-chip" onClick={(e) => e.stopPropagation()}>
+              <i className="material-symbols-outlined reminder-chip-icon">
+                task_alt
+              </i>
+              <span>
+                {reminder.date}, {reminder.time}
+              </span>
+              <i
+                className="material-symbols-outlined reminder-chip-close"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setReminder(null);
+                }}
+              >
+                close
+              </i>
+            </div>
+          )}
           {isActiveForm ? (
             <div className="form-actions">
               <div className="icons">
-
                 <div className="reminder-wrapper">
                   <div className="tooltip">
                     <i
@@ -211,7 +229,7 @@ const Form = (props) => {
                     </div>
                   )}
                 </div>
-                
+
                 <div className="tooltip">
                   <i className="material-symbols-outlined hover small-icon">
                     person_add

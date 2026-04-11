@@ -96,11 +96,11 @@ body {
 }
 
 .main-expanded {
-  margin-left: 280px;   /* 👈 matches expanded sidebar width + some breathing room */
+  margin-left: 280px;
 }
 
 .main-collapsed {
-  margin-left: 90px;    /* 👈 matches collapsed sidebar icon-only width */
+  margin-left: 90px;
 }
 
 .empty-view {

@@ -1,7 +1,15 @@
 import Note from "../Notes/Note";
 import "../Notes/Notes.css";
 
-const ArchiveView = ({ notes, isListView, deleteNote, unarchiveNote, toggleModal, setSelectedNote }) => (
+const ArchiveView = ({
+  notes,
+  isListView,
+  deleteNote,
+  unarchiveNote,
+  removeReminder,
+  toggleModal,
+  setSelectedNote,
+}) => (
   <div className="notes-view">
     {notes.length === 0 ? (
       <div className="notes notes-empty">
@@ -17,9 +25,10 @@ const ArchiveView = ({ notes, isListView, deleteNote, unarchiveNote, toggleModal
             key={note.id}
             note={note}
             deleteNote={deleteNote}
-            archiveNote={unarchiveNote}   
-            archiveIcon="unarchive"       
+            archiveNote={unarchiveNote}
+            archiveIcon="unarchive"
             archiveTooltip="Unarchive"
+            removeReminder={removeReminder}
             toggleModal={toggleModal}
             setSelectedNote={setSelectedNote}
           />

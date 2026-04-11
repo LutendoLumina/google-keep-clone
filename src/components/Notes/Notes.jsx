@@ -8,6 +8,7 @@ const Notes = (props) => {
     isListView,
     deleteNote,
     archiveNote,
+    removeReminder,
     toggleModal,
     setSelectedNote,
   } = props;
@@ -37,6 +38,7 @@ const Notes = (props) => {
           note={note}
           deleteNote={deleteNote}
           archiveNote={archiveNote}
+          removeReminder={removeReminder}
           toggleModal={toggleModal}
           setSelectedNote={setSelectedNote}
         />

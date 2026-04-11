@@ -1,260 +1,408 @@
-/* Responsive layout overrides (mobile-first adjustments via breakpoints)
-   Breakpoints:
-   - Large desktop: 1400px+
-   - Desktop: 1024px - 1399px
-   - Tablet landscape: 768px - 1023px
-   - Tablet portrait: 576px - 767px
-   - Mobile: below 576px
-*/
+/* ============================================================
+   BASE — all screen sizes
+   ============================================================ */
 
-/* Smooth layout transitions */
-nav,
-.sidebar,
-.main-content,
-.notes,
-.form-container,
-.search-area,
-.profile-actions-area,
-.logo-area {
-  transition: all 0.25s ease;
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
-/* Touch-friendly tap targets */
-.hover,
-button,
-.sidebar-item,
-.sidebar-active-item,
-.settings-dropdown p,
-.apps-dropdown .app-item,
-.more-google-btn {
-  min-width: 44px;
-  min-height: 44px;
+* {
+  box-sizing: border-box;
 }
 
-.hover {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+.sidebar {
+  transition: width 0.25s ease, transform 0.25s ease;
 }
 
-/* Notes grid: explicit per breakpoint (overrides component queries) */
-.notes--grid {
-  columns: 4;
-  column-gap: 12px;
+.main-content {
+  transition: margin-left 0.25s ease;
 }
 
-/* =========================
-   MOBILE (below 576px)
-   ========================= */
+
+/* ============================================================
+   MOBILE — below 576px
+   ============================================================ */
 @media (max-width: 575.98px) {
+
   html {
     font-size: 14px;
   }
 
-  /* Navbar: keep top fixed feel, compact content */
+  /* ── NAVBAR ── */
   nav {
-    margin: 0;
-    padding: 8px;
+    height: 56px;
+    padding: 4px 8px;
+    gap: 4px;
   }
 
-  /* Hide everything but hamburger + logo by default */
-  .profile-actions-area > .tooltip:not(:last-child) {
-    display: none;
+  .logo {
+    width: 32px;
+    height: 28px;
   }
 
-  /* Search UX: full-width overlay when active */
-  nav.navbar--search-active .logo-area,
-  nav.navbar--search-active .profile-actions-area {
-    display: none;
+  .logo-text {
+    font-size: 1rem;
   }
 
   .search-area {
+    flex: 1;
+    width: auto !important;
+    min-width: 0;
+    height: 40px;
+  }
+
+  .search-area input {
+    font-size: 0.9rem;
     width: 100%;
-    max-width: 100%;
-    height: 48px;
-    border-radius: 10px;
   }
 
-  nav.navbar--search-active .search-area {
-    position: fixed;
-    top: 8px;
-    left: 8px;
-    right: 8px;
-    z-index: 1200;
-    width: auto;
-    box-shadow: var(--shadow-3);
+  /* Hide refresh, view toggle, settings, apps — keep account only */
+  .profile-actions-area .tooltip:nth-child(1),
+  .profile-actions-area .tooltip:nth-child(2),
+  .profile-actions-area .tooltip:nth-child(3),
+  .profile-actions-area .tooltip:nth-child(4) {
+    display: none;
   }
 
-  /* Main content full width */
+  /* ── SIDEBAR — fixed overlay, slides over content ── */
+  .sidebar {
+    position: fixed !important;
+    top: 56px !important;
+    left: 0 !important;
+    width: 240px !important;
+    height: calc(100vh - 56px) !important;
+    z-index: 1300 !important;
+    transform: translateX(-100%) !important;
+    margin: 0 !important;
+    padding-top: 8px;
+    background-color: #ffffff;
+    box-shadow: 4px 0 16px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+  }
+
+  /* Dark mode sidebar background */
+  body.dark .sidebar {
+    background-color: #202124 !important;
+    box-shadow: 4px 0 16px rgba(0, 0, 0, 0.6);
+  }
+
+  /* Slide in when expanded */
+  .sidebar.sidebar--expanded {
+    transform: translateX(0) !important;
+  }
+
+  /* Always show text labels when open on mobile */
+  .sidebar.sidebar--expanded .sidebar-text {
+    display: block !important;
+    opacity: 1 !important;
+    width: auto !important;
+  }
+
+  /* Sidebar items full width on mobile */
+  .sidebar .sidebar-item,
+  .sidebar .sidebar-active-item {
+    width: 100%;
+    min-height: 44px;
+    padding: 8px 16px;
+    border-radius: 0 25px 25px 0;
+  }
+
+  /* ── BACKDROP — behind sidebar, above content ── */
+  .sidebar-backdrop {
+    display: block !important;
+    position: fixed !important;
+    top: 56px !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: calc(100vh - 56px) !important;
+    background: rgba(0, 0, 0, 0.5) !important;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1250 !important;
+    transition: opacity 0.25s ease;
+  }
+
+  .sidebar-backdrop.open {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  /* ── MAIN CONTENT — never shifts on mobile ── */
   .main-content,
   .main-expanded,
   .main-collapsed {
     margin-left: 0 !important;
-    padding: 8px;
+    margin-top: 56px !important;
+    padding: 8px !important;
+    width: 100% !important;
   }
 
-  /* Form full width with margin */
+  /* ── FORM ── */
   .form-container {
-    max-width: 100%;
-    margin: 8px;
-  }
-
-  /* Form footer: keep actions inside container (wrap/stack) */
-  .form-actions {
-    flex-wrap: wrap;
-    gap: 8px;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 8px 0 16px 0 !important;
   }
 
   .form .form-actions .icons {
     flex-wrap: wrap;
-    row-gap: 4px;
+    gap: 4px;
   }
 
   .form-button {
-    white-space: normal;
     margin-left: auto;
     gap: 8px;
+    white-space: nowrap;
   }
 
-  /* Notes: 1 column */
-  .notes {
-    padding: 8px;
+  .note-title,
+  .note-text {
+    font-size: 0.95rem;
+    padding: 8px 12px;
   }
+
+  /* ── NOTES ── */
+  .notes {
+    padding: 8px 0 !important;
+    width: 100% !important;
+  }
+
   .notes--grid {
     columns: 1 !important;
+    column-gap: 0 !important;
   }
 
-  /* Note footer: wrap so icons never overflow */
+  .notes--list {
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+
+  .notes--grid .note,
+  .notes--list .note {
+    width: 100% !important;
+    margin: 0 0 10px 0 !important;
+  }
+
+  /* ── NOTE CARD ── */
+  .note .title {
+    font-size: 0.95rem;
+    padding: 12px 12px 0 12px;
+  }
+
+  .note .text {
+    font-size: 0.85rem;
+    padding: 8px 12px 0 12px;
+  }
+
+  /* ── NOTE FOOTER ── */
   .note .note-footer {
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center;
     gap: 4px;
-    padding: 8px 8px 12px 8px;
+    padding: 8px 4px 12px 4px;
+    margin-top: 8px;
   }
 
-  /* Note footer icons larger for touch */
   .note-footer .material-symbols-outlined {
-    font-size: 1.35rem;
+    font-size: 1.4rem !important;
   }
 
-  /* Sidebar: hidden by default, overlay slide-in when expanded */
-  .sidebar {
-    top: 64px;
+  /* ── MODAL ── */
+  .modal .modal-content {
+    width: 95vw !important;
+    max-width: 95vw !important;
+  }
+
+  /* ── DROPDOWNS — keep inside screen ── */
+  .settings-dropdown,
+  .apps-dropdown {
+    right: 0;
+    left: auto;
+  }
+
+  .apps-dropdown {
+    width: 280px;
+  }
+
+  .settings-dropdown {
+    width: 200px;
+  }
+
+  .reminder-picker {
+    width: 240px;
     left: 0;
-    margin-left: 0;
-    width: 220px;
-    height: calc(100vh - 64px);
-    background: var(--surface);
-    z-index: 1300;
-    transform: translateX(-110%);
-    box-shadow: var(--shadow-3);
+    right: auto;
   }
 
-  .sidebar.sidebar--expanded {
-    transform: translateX(0);
+  /* ── LABELS MODAL ── */
+  .labels-modal {
+    width: 90vw !important;
   }
 
-  .sidebar-backdrop {
-    position: fixed;
-    top: 64px;
-    left: 0;
-    width: 100%;
-    height: calc(100vh - 64px);
-    background: var(--overlay);
-    opacity: 0;
-    pointer-events: none;
-    z-index: 1250;
-    transition: all 0.25s ease;
+  /* ── EMPTY STATES ── */
+  .notes-empty {
+    min-height: 40vh;
   }
 
-  .sidebar-backdrop.open {
-    opacity: 1;
-    pointer-events: auto;
+  .empty-icon {
+    font-size: 4rem !important;
+  }
+
+  .empty-view p {
+    font-size: 0.9rem;
+    text-align: center;
+    padding: 0 16px;
+  }
+
+  /* ── TRASH HEADER ── */
+  .trash-header {
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
+    font-size: 0.8rem;
+    padding: 8px;
   }
 }
 
-/* =========================
-   TABLET PORTRAIT (576px - 767px)
-   ========================= */
+
+/* ============================================================
+   TABLET PORTRAIT — 576px to 767px
+   ============================================================ */
 @media (min-width: 576px) and (max-width: 767.98px) {
-  /* Navbar: show all icons, slightly smaller search */
+
+  /* ── NAVBAR ── */
   .search-area {
-    width: 420px;
+    width: 280px;
   }
 
-  /* Sidebar: collapsed by default visually, no hover expand */
-  .sidebar {
-    width: 56px !important;
-  }
-  .sidebar.sidebar--expanded {
-    width: 56px !important;
-  }
-  .sidebar .sidebar-text {
+  /* ── SIDEBAR — always visible, icon only when collapsed ── */
+  .sidebar-backdrop {
     display: none !important;
   }
 
-  /* Main content: align with collapsed sidebar */
-  .main-content,
-  .main-expanded,
-  .main-collapsed {
-    margin-left: 56px !important;
+  .sidebar.sidebar--collapsed {
+    width: 56px !important;
+    transform: none !important;
   }
 
-  /* Notes grid: 2 columns */
+  .sidebar.sidebar--collapsed .sidebar-text {
+    display: none !important;
+  }
+
+  .sidebar.sidebar--expanded {
+    width: 220px !important;
+    transform: none !important;
+  }
+
+  .sidebar.sidebar--expanded .sidebar-text {
+    display: block !important;
+  }
+
+  /* ── MAIN CONTENT ── */
+  .main-collapsed {
+    margin-left: 72px !important;
+  }
+
+  .main-expanded {
+    margin-left: 236px !important;
+  }
+
+  /* ── NOTES GRID — 2 columns ── */
   .notes--grid {
     columns: 2 !important;
   }
 
-  /* Form: full width with margin */
+  /* ── FORM ── */
   .form-container {
-    max-width: 100%;
-    margin: 16px;
+    max-width: 100% !important;
+    margin: 12px 0 !important;
   }
 }
 
-/* =========================
-   TABLET LANDSCAPE (768px - 1023px)
-   ========================= */
+
+/* ============================================================
+   TABLET LANDSCAPE — 768px to 1023px
+   ============================================================ */
 @media (min-width: 768px) and (max-width: 1023.98px) {
-  /* Sidebar: collapsed by default, hover expand allowed (existing behavior) */
-  .sidebar {
-    width: 56px;
+
+  /* ── NAVBAR ── */
+  .search-area {
+    width: 380px;
   }
 
-  /* Main content margin for collapsed sidebar */
-  .main-content,
+  /* ── SIDEBAR — hover expand works ── */
+  .sidebar-backdrop {
+    display: none !important;
+  }
+
+  .sidebar.sidebar--collapsed {
+    width: 56px !important;
+  }
+
+  .sidebar.sidebar--expanded {
+    width: 220px !important;
+  }
+
+  /* ── MAIN CONTENT ── */
   .main-collapsed {
-    margin-left: 56px !important;
+    margin-left: 72px !important;
   }
 
-  /* Notes grid: 3 columns */
+  .main-expanded {
+    margin-left: 236px !important;
+  }
+
+  /* ── NOTES GRID — 3 columns ── */
   .notes--grid {
     columns: 3 !important;
   }
 
-  /* Form centered at 598px (existing) */
+  /* ── FORM ── */
   .form-container {
     max-width: 598px;
-    margin: 8px auto;
+    margin: 12px auto !important;
   }
 }
 
-/* =========================
-   DESKTOP (1024px - 1399px)
-   ========================= */
+
+/* ============================================================
+   DESKTOP — 1024px to 1399px
+   ============================================================ */
 @media (min-width: 1024px) and (max-width: 1399.98px) {
-  /* Keep current behavior; ensure grid stays 4 columns */
+
   .notes--grid {
-    columns: 4 !important;
+    columns: 3 !important;
+  }
+
+  .main-collapsed {
+    margin-left: 90px;
+  }
+
+  .main-expanded {
+    margin-left: 260px;
   }
 }
 
-/* =========================
-   LARGE DESKTOP (1400px+)
-   ========================= */
+
+/* ============================================================
+   LARGE DESKTOP — 1400px+
+   ============================================================ */
 @media (min-width: 1400px) {
+
   .notes--grid {
     columns: 4 !important;
   }
-}
 
+  .search-area {
+    width: 720px;
+  }
+
+  .main-collapsed {
+    margin-left: 90px;
+  }
+
+  .main-expanded {
+    margin-left: 260px;
+  }
+}

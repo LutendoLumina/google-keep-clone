@@ -50,7 +50,7 @@ const Note = (props) => {
             className="material-symbols-outlined reminder-chip-close"
             onClick={(e) => {
               e.stopPropagation();
-              props.removeReminder(note.id);
+              props.removeReminder?.(note.id);
             }}
           >
             close

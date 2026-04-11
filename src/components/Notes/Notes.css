@@ -84,9 +84,9 @@
 /* ===== NOTE FOOTER (action icons) ===== */
 .note .note-footer {
   display: flex;
-  justify-content: center;
-  margin-top: 8px;
+  margin-top: 15px;
   padding: 4px 0 8px 0;
+  justify-content: center;
 }
 
 .note-footer .material-symbols-outlined {

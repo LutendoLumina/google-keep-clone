@@ -117,17 +117,20 @@ const App = () => {
   // Empty entire trash
   const emptyTrash = () => setTrashedNotes([]);
 
-  const editNote = (editNote) => {
-    setNotes((prevNotes) => {
-      const newArray = prevNotes.map((note) => {
-        if (editNote.id === note.id) {
-          note.title = editNote.title;
-          note.text = editNote.text;
-        }
-        return note;
-      });
-      return newArray;
-    });
+  const editNote = (payload) => {
+    setNotes((prevNotes) =>
+      prevNotes.map((note) =>
+        note.id === payload.id
+          ? {
+              ...note,
+              title: payload.title,
+              text: payload.text,
+              reminder:
+                payload.reminder !== undefined ? payload.reminder : note.reminder,
+            }
+          : note,
+      ),
+    );
   };
 
   const toggleModal = () => {
@@ -138,6 +141,9 @@ const App = () => {
 
   const removeReminder = (id) => {
     setNotes((prev) =>
+      prev.map((note) => (note.id === id ? { ...note, reminder: null } : note)),
+    );
+    setArchivedNotes((prev) =>
       prev.map((note) => (note.id === id ? { ...note, reminder: null } : note)),
     );
   };
@@ -196,6 +202,7 @@ const App = () => {
                   isListView={isListView}
                   deleteNote={deleteNote}
                   archiveNote={archiveNote}
+                  removeReminder={removeReminder}
                   toggleModal={toggleModal}
                   setSelectedNote={setSelectedNote}
                 />
@@ -219,6 +226,7 @@ const App = () => {
                 isListView={isListView}
                 deleteNote={deleteNote}
                 unarchiveNote={unarchiveNote}
+                removeReminder={removeReminder}
                 toggleModal={toggleModal}
                 setSelectedNote={setSelectedNote}
               />

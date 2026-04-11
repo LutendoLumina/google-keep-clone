@@ -13,7 +13,13 @@ const Modal = (props) => {
     return (
         <div className={`modal ${isModalOpen ? "open-modal": ""}`} onClick={handleCloseModal}>
             <div className="modal-content" onMouseOver={handleMouseOverModal} onMouseOut={handleMouseOutModal}>
-                <Form selectedNote={selectedNote} toggleModal={toggleModal} editNote={editNote} edit/>
+                <Form
+                  key={selectedNote?.id ?? "new"}
+                  selectedNote={selectedNote}
+                  toggleModal={toggleModal}
+                  editNote={editNote}
+                  edit
+                />
             </div>
         </div>
     );
