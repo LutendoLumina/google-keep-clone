@@ -19,7 +19,7 @@ A fully functional Google Keep clone built with React and Vite. Designed to clos
 - **Sidebar views** — Notes, Reminders, Archive, Bin, and custom label pages
 - **Dynamic navbar title** — updates to match the active view (Keep / Reminders / Archive / Bin)
 
-### Search (Custom Feature — No AI)
+### Search
 - **Global search** across Notes, Archive, and Bin simultaneously
 - **Real-time filtering** on every keystroke
 - **Keyword highlighting** — matched text is highlighted in yellow on results
